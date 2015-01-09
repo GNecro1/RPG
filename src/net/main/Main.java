@@ -1,58 +1,37 @@
 package net.main;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferStrategy;
+import static net.main.Render.BeginSesion;
 
-import javax.swing.JFrame;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.opengl.Texture;
 
-public class Main extends Canvas implements Runnable {
+public class Main {
 
 	public Main() {
-		setPreferredSize(new Dimension(800, 600));
+		BeginSesion();
+		Res.init();
+		run();
 	}
-
-	public void render(Graphics2D g) {
-
+	
+	public void tick(double delta){
+		
 	}
-
-	public void tick(double delta) {
-
+	
+	public void render(){
+		Render.drawTexture(Res.grass, 0, 0, 64, 64);
+		Render.drawTexture(Res.mud, 64, 0, 64, 64);
 	}
-
-	public static void main(String[] args) {
-		JFrame jf = new JFrame();
-		Main m = new Main();
-		jf.add(m);
-		jf.pack();
-		jf.requestFocus();
-		jf.setTitle("RPG");
-		jf.setVisible(true);
-		jf.setResizable(false);
-		jf.setDefaultCloseOperation(3);
-		jf.setLocationRelativeTo(null);
-		m.start();
-	}
-
-	private synchronized void start() {
-		Thread t = new Thread(this);
-		t.start();
-	}
-
+	
 	public int FpsCounter = 0;
 	public int FPS = 60;
-
+	
 	public void run() {
 		long lastLoopTime = System.nanoTime();
 		final int TARGET_FPS = 60;
 		final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
 		long lastFpsTime = 0;
-
-		while (true) {
+		while (!Display.isCloseRequested()) {
 			long now = System.nanoTime();
 			long updateLength = now - lastLoopTime;
 			lastLoopTime = now;
@@ -63,13 +42,13 @@ public class Main extends Canvas implements Runnable {
 
 			if (lastFpsTime >= 1000000000) {
 				lastFpsTime = 0;
+				System.out.println("FPS : " + FpsCounter);
 				FPS = FpsCounter;
 				FpsCounter = 0;
 			}
-
 			tick(delta);
-			draw();
-
+			render();
+			Display.update();
 			try {
 				long sleepTime = (lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000;
 				if (sleepTime < 0) {
@@ -79,23 +58,12 @@ public class Main extends Canvas implements Runnable {
 			} catch (Exception e) {
 				e.printStackTrace(System.out);
 			}
+			
 		}
+		Display.destroy();
 	}
 
-	private void draw() {
-		BufferStrategy bs = getBufferStrategy();
-		if (bs == null) {
-			createBufferStrategy(2);
-			return;
-		}
-		Graphics g1 = bs.getDrawGraphics();
-		Graphics2D g = (Graphics2D) g1;
-		g.clearRect(0, 0, getWidth(), getHeight());
-		render(g);
-		g.setFont(new Font("Arial", 0, 16));
-		g.setColor(Color.black);
-		g.drawString("FPS : " + FPS, 8, 16);
-		bs.show();
-		g.dispose();
+	public static void main(String[] args) {
+		Main m = new Main();
 	}
 }
