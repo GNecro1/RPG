@@ -25,7 +25,7 @@ import org.newdawn.slick.opengl.Texture;
 
 public class Render {
 
-	public static final int WIDTH = 832, HEIGHT = 640;
+	public static final int WIDTH = 1024, HEIGHT = 764;
 
 	public static float xOff = 0, yOff = 0;
 
@@ -44,6 +44,7 @@ public class Render {
 		glEnable(GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glClearColor(0F, 0F, 0F, 1F);
 	}
 
 	public static void drawLine(float startX, float startY, float endX, float endY) {

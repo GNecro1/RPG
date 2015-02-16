@@ -2,9 +2,9 @@ package net.entity;
 
 import java.awt.Rectangle;
 
-public class Entity extends Rectangle{
+public class Entity{
 	
-	public Entity(float x, float y, float width, float height){
+	public Entity(float x, float y){
 		
 	}
 

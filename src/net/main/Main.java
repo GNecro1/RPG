@@ -56,7 +56,6 @@ public class Main {
 				FpsCounter = 0;
 				tick = 0;
 			}
-			GL11.glClearColor(0F, 0F, 0F, 1F);
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 			if(delta > 1.0D){
 				tick(delta);
