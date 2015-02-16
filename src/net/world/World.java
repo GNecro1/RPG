@@ -14,7 +14,7 @@ public class World {
 				t[i][j] = new Tile(i*64,j*64,TileType.Grass);
 			}
 		}
-		t[0][0] = new Tile(0,0,TileType.Mud);
+		t[1][1] = new Tile(64,64,TileType.Mud);
 		p = new Player();
 	}
 	
@@ -28,7 +28,7 @@ public class World {
 	}
 	
 	public void tick(double delta){
-		p.tick(delta);
+		p.tick(delta , t);
 	}
 
 }

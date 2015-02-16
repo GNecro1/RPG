@@ -7,7 +7,7 @@ import net.main.Render;
 
 import org.newdawn.slick.opengl.Texture;
 
-public class Tile extends Rectangle {
+public class Tile{
 
 	private float x, y, width, height;
 	private Texture t;
@@ -76,5 +76,13 @@ public class Tile extends Rectangle {
 
 	public void setType(TileType type) {
 		this.type = type;
+	}
+	
+	public boolean isSolid(){
+		return type.solid;
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle((int) x, (int) y, (int) width, (int) height);
 	}
 }

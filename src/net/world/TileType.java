@@ -4,14 +4,14 @@ import org.newdawn.slick.opengl.Texture;
 
 public enum TileType {
 	
-	Grass("img/grass.png", true), Mud("img/mud.png", false);
+	Grass("img/grass.png", false), Mud("img/mud.png", true);
 	
 	String t;
-	boolean buildable;
+	boolean solid;
 	
-	TileType(String t, boolean buildable){
+	TileType(String t, boolean solid){
 		this.t = t;
-		this.buildable = buildable;
+		this.solid = solid;
 		
 	}
 

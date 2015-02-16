@@ -39,6 +39,7 @@ public class Main {
 		final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
 		long lastFpsTime = 0;
 		double delta = 0;
+		int tick = 0;
 		while (!Display.isCloseRequested()) {
 			long now = System.nanoTime();
 			long updateLength = now - lastLoopTime;
@@ -50,15 +51,17 @@ public class Main {
 
 			if (lastFpsTime >= 1000000000) {
 				lastFpsTime = 0;
-				System.out.println("FPS : " + FpsCounter);
+				System.out.println("FPS : " + FpsCounter + " TICKS : " + tick);
 				FPS = FpsCounter;
 				FpsCounter = 0;
+				tick = 0;
 			}
 			GL11.glClearColor(0F, 0F, 0F, 1F);
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 			if(delta > 1.0D){
 				tick(delta);
 				delta -= 1.0D;
+				tick++;
 			}
 			render();
 
