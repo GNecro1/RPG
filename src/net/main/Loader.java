@@ -7,7 +7,8 @@ import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class Loader {
-	public static Texture getTexture(String path, String fileType) {
+	public static Texture getTexture(String path) {
+		String fileType = "PNG";
 		Texture t = null;
 		try {
 			t = TextureLoader.getTexture(fileType, ResourceLoader.getResourceAsStream(path));
