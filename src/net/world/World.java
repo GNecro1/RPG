@@ -12,9 +12,11 @@ public class World {
 		for (int i = 0; i < t.length; i++) {
 			for (int j = 0; j < t[0].length; j++) {
 				t[i][j] = new Tile(i*64,j*64,TileType.Grass);
+				if(i == j || i == j-1 || i == j-2){
+					t[i][j] = new Tile(i*64,j*64, TileType.Mud);
+				}
 			}
 		}
-		t[1][1] = new Tile(64,64,TileType.Mud);
 		p = new Player();
 	}
 	
