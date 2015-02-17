@@ -1,28 +1,34 @@
 package net.main;
 
 import static net.main.Render.Begin;
-import net.world.Tile;
-import net.world.TileType;
+
+import java.util.ArrayList;
+
+import net.util.Animation;
 import net.world.World;
 
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 public class Main {
-	
+
 	public World world;
-	
+	public static ArrayList<Animation> animations = new ArrayList<Animation>();
+
 	public Main() {
 		Begin();
 		init();
 		run();
 	}
-	
-	public void init(){
+
+	public void init() {
 		world = new World();
 	}
 
 	public void tick(double delta) {
+		for(Animation a : animations){
+			a.tick(delta);
+		}
 		world.tick(delta);
 	}
 
@@ -57,7 +63,7 @@ public class Main {
 				tick = 0;
 			}
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-			if(delta > 1.0D){
+			if (delta > 1.0D) {
 				tick(delta);
 				delta -= 1.0D;
 				tick++;
