@@ -88,7 +88,7 @@ public class Player {
 		return new Rectangle((int) x, (int) y, (int) width, (int) height);
 	}
 
-	public void render() {
+	public void draw() {
 		a.render(x, y, width, height);
 	}
 }
